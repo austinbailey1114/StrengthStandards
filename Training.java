@@ -1,22 +1,31 @@
 package lift;
 import java.util.*;
+import  java.io.*;
 
 public class Training {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Enter your lift in the following format:");
-		System.out.println("lift,bodyweight,liftweight,liftreps");
-		System.out.println();
-		System.out.print("Enter here: ");
-		
+		System.out.print("Enter your name.txt here: ");
 		Scanner scanner = new Scanner(System.in);
-		String input = scanner.nextLine();
+		String name = scanner.nextLine();
 		scanner.close();
-		String info[] = input.split(",");
 		
-		Lift test = new Lift(info[2], info[3], info[1], info[0]);
-		test.printLiftInfo();
+		InputStream filereader = null;
+		try {
+			filereader = new FileInputStream(name);
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		}
+		BufferedReader buf = new BufferedReader(new InputStreamReader(filereader));
+		String info[] = new String[9];
+		for(int i = 0; i < 9; i++) {
+			try {
+				info[i] = buf.readLine();
+			} catch (IOException e) {
+				System.out.println("Line not found at index" + i);
+			}
+		}
+		Person austin = new Person(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8]);
 	}
 
 }

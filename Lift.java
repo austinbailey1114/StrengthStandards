@@ -6,11 +6,12 @@ public class Lift {
 	double reps;
 	String liftType;
 	double wilks_constants[] = {-216.0475144, 16.2606339, -0.002388645, -0.00113732, 7.01863e-06, -1.291e-08};
-	Lift(String w, String r, String bw, String l) {
+	public Lift(String w, String r, String bw, String l) {
 		bodyWeight = Double.parseDouble(bw);
 		weight = Double.parseDouble(w);
 		reps = Double.parseDouble(r);
 		liftType = l;
+		this.printLiftInfo();
 	}
 	
 	private double max() {
