@@ -1,6 +1,6 @@
 package lift;
 import java.util.*;
-import  java.io.*;
+import java.io.*;
 
 public class Training {
 
@@ -10,13 +10,12 @@ public class Training {
 		if(scanner.nextLine().equals("no")) {
 			System.out.print("Enter your name here: ");
 			String name = scanner.nextLine() + ".txt";
-			scanner.close();
 			
 			InputStream filereader = null;
 			try {
 				filereader = new FileInputStream(name);
 			} catch (FileNotFoundException e) {
-				System.out.println("File not found");
+				System.out.println("User not found");
 			}
 			BufferedReader buf = new BufferedReader(new InputStreamReader(filereader));
 			String info[] = new String[9];
@@ -27,7 +26,17 @@ public class Training {
 					System.out.println("Line not found at index" + i);
 				}
 			}
-			Person austin = new Person(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8]);
+			System.out.println("Would you like to update any of your information? (yes/no): ");
+			String answer = scanner.nextLine();
+			if (answer.equals("no")) {
+				Person person = new Person(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8]);
+
+			}
+			else {
+				System.out.println("What would you like to update? (weight/height/deadlift/squat/bench) :");
+				String updateField = scanner.nextLine();
+				Person.updateInfo(name, info, updateField);
+			}
 		}
 		else {
 			System.out.print("Enter your name: ");
@@ -45,7 +54,6 @@ public class Training {
 			for(int i = 0; i < 9; i++) {
 				try {
 					buf.write(data[i] + "\n");
-					//buf.newLine();
 				} catch (IOException e) {
 					System.out.println("Cannot write to file");
 				}				
